@@ -1,11 +1,11 @@
-// projects ara yazılımları buraya
+// eylemlerle ilgili ara katman yazılımları yazın
 
-const projectsModel = require("./projects-model");
+const actionsModel = require("./actions-model");
 
 async function checkProjectExists(req, res, next) {
   try {
     const projectId = req.params.id;
-    const project = await projectsModel.get(projectId);
+    const project = await actionsModel.get(projectId);
     if (project) {
       req.project = project;
       next();
@@ -19,9 +19,9 @@ async function checkProjectExists(req, res, next) {
 
 async function payloadValidation(req, res, next) {
   try {
-    if (!req.body.name || !req.body.description) {
+    if (!req.body.project_id || !req.body.description || !req.body.notes) {
       res.status(400).json({
-        message: "Please provide name, description",
+        message: "Please provide id, description, and notes",
       });
     } else {
       next();
