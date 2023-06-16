@@ -24,8 +24,9 @@ router.get("/:id", mw.checkProjectExists, (req, res, next) => {
 router.post("/", mw.payloadValidation, async (req, res, next) => {
   try {
     const insertedProject = await actionsModel.insert({
-      name: req.body.name,
+      project_id: req.body.project_id,
       description: req.body.description,
+      notes: req.body.notes,
     });
     res.json(insertedProject);
   } catch (error) {

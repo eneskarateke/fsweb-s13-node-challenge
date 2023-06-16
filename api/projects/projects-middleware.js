@@ -6,11 +6,11 @@ async function checkProjectExists(req, res, next) {
   try {
     const projectId = req.params.id;
     const project = await projectsModel.get(projectId);
-    if (project) {
+    if (!project) {
+      res.status(404).json({ message: "Project not found" });
+    } else {
       req.project = project;
       next();
-    } else {
-      res.status(404).json({ message: "Project not found" });
     }
   } catch (error) {
     next(error);

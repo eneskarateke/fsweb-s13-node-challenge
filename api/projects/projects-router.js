@@ -40,7 +40,11 @@ router.put(
     const id = req.params.id;
 
     try {
-      const updatedProject = await projectsModel.update(id, req.body);
+      const updatedProject = await projectsModel.update(id, {
+        name: req.body.name,
+        description: req.body.description,
+        completed: req.body.completed,
+      });
       res.json(updatedProject);
     } catch (error) {
       next(error);
