@@ -25,6 +25,7 @@ router.post("/", mw.payloadValidation, async (req, res, next) => {
     const insertedProject = await projectsModel.insert({
       name: req.body.name,
       description: req.body.description,
+      completed: req.body.completed,
     });
     res.json(insertedProject);
   } catch (error) {

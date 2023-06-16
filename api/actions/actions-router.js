@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", mw.checkProjectExists, (req, res, next) => {
   try {
-    res.json(req.project);
+    res.json(req.action);
   } catch (error) {
     next(error);
   }
